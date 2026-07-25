@@ -1,0 +1,45 @@
+{
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.104.1",
+    "expo": "^56.0.11",
+    "expo-constants": "^56.0.18",
+    "expo-file-system": "~56.0.8",
+    "expo-image-picker": "~56.0.17",
+    "expo-linking": "^56.0.14",
+    "expo-media-library": "~56.0.7",
+    "expo-router": "^56.2.10",
+    "expo-status-bar": "^56.0.4",
+    "react": "^19.2.7",
+    "react-native": "^0.86.0",
+    "react-native-safe-area-context": "^5.8.0",
+    "react-native-screens": "^4.25.2",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17",
+    "@types/react-native": "^0.72.8",
+    "typescript": "^6.0.3"
+  },
+  "name": "scamshield-ph",
+  "version": "1.0.0",
+  "description": "Screenshot a suspicious message, get an instant scam verdict — built for the Philippines.",
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matt869/scamshield-ph.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matt869/scamshield-ph/issues"
+  },
+  "homepage": "https://github.com/matt869/scamshield-ph#readme"
+}

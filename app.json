@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "ScamShield PH",
+    "slug": "scamshield-ph",
+    "version": "1.0.0",
+    "scheme": "scamshield",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#020617",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "ph.scamshield.app",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "ScamShield reads your screenshots so it can check suspicious messages for scams. Images are analyzed and never stored."
+      }
+    },
+    "android": {
+      "package": "ph.scamshield.app",
+      "permissions": ["READ_MEDIA_IMAGES"]
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "ScamShield reads your screenshots so it can check suspicious messages for scams.",
+          "savePhotosPermission": "ScamShield does not save photos.",
+          "isAccessMediaLocationEnabled": false
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "ScamShield lets you pick a screenshot of a suspicious message to analyze."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": false
+    }
+  }
+}
