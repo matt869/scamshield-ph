@@ -1,8 +1,23 @@
 import React from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, Share, StyleSheet, Text, View } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 import { ConfidenceMeter, VERDICT_COLORS, VERDICT_LABELS } from '../components/ConfidenceMeter';
 import { useAppStore } from '../store/useAppStore';
+import type { ScamAnalysis } from '../types';
+
+/** Builds a redacted, forward-safe summary — never includes raw PII. */
+function shareText(analysis: ScamAnalysis): string {
+  const lines = [
+    `${VERDICT_LABELS[analysis.verdict]} — ${analysis.categoryLabel}`,
+    '',
+    analysis.summary,
+  ];
+  if (analysis.redFlags.length > 0) {
+    lines.push('', 'Red flags:', ...analysis.redFlags.map((f) => `• ${f}`));
+  }
+  lines.push('', 'Checked with ScamShield PH — screenshot a suspicious message to check it yourself.');
+  return lines.join('\n');
+}
 
 export default function ResultScreen() {
   const router = useRouter();
@@ -82,6 +97,14 @@ export default function ResultScreen() {
           <Text style={styles.navCardHint}>"Paano ko malalaman kung legit?" →</Text>
         </Pressable>
       </Link>
+
+      <Pressable
+        style={styles.navCard}
+        onPress={() => void Share.share({ message: shareText(analysis) })}
+      >
+        <Text style={styles.navCardTitle}>📤 Share this warning</Text>
+        <Text style={styles.navCardHint}>Warn family or friends — personal info stays masked →</Text>
+      </Pressable>
 
       {analysis.extractedText ? (
         <View style={styles.section}>
