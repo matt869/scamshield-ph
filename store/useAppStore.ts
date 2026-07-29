@@ -19,6 +19,7 @@ interface AppState {
   clearError: () => void;
   selectAnalysis: (analysis: ScamAnalysis) => void;
   clearHistory: () => void;
+  removeFromHistory: (id: string) => void;
 
   addThreadMessage: (message: ThreadMessage) => void;
   setThreadBusy: (busy: boolean) => void;
@@ -51,6 +52,9 @@ export const useAppStore = create<AppState>((set) => ({
     set({ currentAnalysis: analysis, threadMessages: [] }),
 
   clearHistory: () => set({ history: [] }),
+
+  removeFromHistory: (id) =>
+    set((state) => ({ history: state.history.filter((a) => a.id !== id) })),
 
   addThreadMessage: (message) =>
     set((state) => ({ threadMessages: [...state.threadMessages, message] })),

@@ -22,7 +22,7 @@ import type { RedactionResult, ScamAnalysis } from '../types';
 export default function HomeScreen() {
   const router = useRouter();
   const { analyzeText, analyzeImage, prepareText, isAnalyzing } = useScamAnalysis();
-  const { history, analysisError, clearError, selectAnalysis } = useAppStore();
+  const { history, analysisError, clearError, selectAnalysis, removeFromHistory } = useAppStore();
 
   const [pickerVisible, setPickerVisible] = useState(false);
   const [pastedText, setPastedText] = useState('');
@@ -77,6 +77,13 @@ export default function HomeScreen() {
     router.push('/result');
   };
 
+  const confirmDeleteHistoryItem = (item: ScamAnalysis) => {
+    Alert.alert('Remove this check?', `"${item.categoryLabel}" will be removed from your history.`, [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Remove', style: 'destructive', onPress: () => removeFromHistory(item.id) },
+    ]);
+  };
+
   return (
     <FlatList
       style={styles.screen}
@@ -126,7 +133,11 @@ export default function HomeScreen() {
         </View>
       }
       renderItem={({ item }) => (
-        <Pressable style={styles.historyItem} onPress={() => openHistoryItem(item)}>
+        <Pressable
+          style={styles.historyItem}
+          onPress={() => openHistoryItem(item)}
+          onLongPress={() => confirmDeleteHistoryItem(item)}
+        >
           <View style={[styles.verdictDot, { backgroundColor: VERDICT_COLORS[item.verdict] }]} />
           <View style={styles.historyTextWrap}>
             <Text style={styles.historyTitle} numberOfLines={1}>
